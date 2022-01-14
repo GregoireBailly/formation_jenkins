@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    parameters {
+      string(name: 'version', description: 'App version to deploy')
+      choice(name: 'env', choices: ['PKG_ONLY','PROD'], description: 'Environment where the app should be deployed')
+    }
     stages {
         stage('Chekout') {
             steps {
@@ -15,17 +19,13 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo 'Building....'
-
-                echo 'Build finished'
+                sh './build.sh'
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
-                echo 'Push image'
-                echo 'update service'
-                echo 'Deploy finished'
+                echo "deploying ${params.version} to ${params.env}"
+                sh "./deploy.sh ${params.env} ${params.version}"
             }
         }
     }
