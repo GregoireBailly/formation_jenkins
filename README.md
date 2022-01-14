@@ -1,4 +1,5 @@
-# formation_jenkins
+# README
 
-This repo is used to explore the possibilities of Jenkins.
+Repo used to test Jenkins possibilities.
 
+Setup was done using this guide https://docs.docker.com/samples/rails/
